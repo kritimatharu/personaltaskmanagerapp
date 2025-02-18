@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 if (task == null) {
                   await _databaseService.addTask(
-                                        _titleController.text, _descriptionController.text);
+                 _titleController.text, _descriptionController.text);
                 } else {
                   await _databaseService.updateTask(task.id,
                       _titleController.text, _descriptionController.text);
