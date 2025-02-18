@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:personaltaskmanagerapp/model/task_model.dart';
@@ -129,6 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
         TextEditingController(text: task?.description);
     final DatabaseService _databaseService = DatabaseService();
 
+    // Default priority is Low
+    String _selectedPriority = task?.priority ?? "Low";
+
     showDialog(
       context: context,
       builder: (context) {
@@ -160,6 +164,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
+                  SizedBox(height: 10),
+                  DropdownButtonFormField<String>(
+                    value: _selectedPriority,
+                    decoration: InputDecoration(
+                      labelText: "Priority",
+                      border: OutlineInputBorder(),
+                    ),
+                    items: ["Low", "Medium", "High"]
+                        .map((priority) => DropdownMenuItem<String>(
+                              value: priority,
+                              child: Text(priority),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      _selectedPriority = value!;
+                    },
+                  ),
                 ],
               ),
             ),
@@ -178,11 +199,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () async {
                 if (task == null) {
-                  await _databaseService.addTask(
-                 _titleController.text, _descriptionController.text);
+                  await _databaseService.addTask(_titleController.text,
+                      _descriptionController.text, _selectedPriority);
                 } else {
-                  await _databaseService.updateTask(task.id,
-                      _titleController.text, _descriptionController.text);
+                  await _databaseService.updateTask(
+                      task.id,
+                      _titleController.text,
+                      _descriptionController.text,
+                      _selectedPriority);
                 }
                 Navigator.pop(context);
               },

@@ -115,6 +115,7 @@ class _PendingWidgetState extends State<PendingWidget> {
         TextEditingController(text: task?.title);
     final TextEditingController _descriptionController =
         TextEditingController(text: task?.description);
+          String _selectedPriority = task?.priority ?? "Low";  // Default to "Low"
     final DatabaseService _databaseService = DatabaseService();
 
     showDialog(
@@ -148,10 +149,30 @@ class _PendingWidgetState extends State<PendingWidget> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                ],
-              ),
+                   SizedBox(height: 10),
+                DropdownButtonFormField<String>(
+                  value: _selectedPriority,
+                  decoration: InputDecoration(
+                    labelText: "Priority",
+                    border: OutlineInputBorder(),
+                  ),
+                  items: ["Low", "Medium", "High"]
+                      .map((priority) => DropdownMenuItem<String>(
+                            value: priority,
+                            child: Text(priority),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedPriority = value!;
+                    });
+                  },
+                ),
+              ],
             ),
           ),
+        ),
+               
           actions: [
             TextButton(
               onPressed: () {
@@ -167,10 +188,10 @@ class _PendingWidgetState extends State<PendingWidget> {
               onPressed: () async {
                 if (task == null) {
                   await _databaseService.addTask(
-                      _titleController.text, _descriptionController.text);
+                      _titleController.text, _descriptionController.text, _selectedPriority);
                 } else {
                   await _databaseService.updateTask(task.id,
-                      _titleController.text, _descriptionController.text);
+                      _titleController.text, _descriptionController.text, _selectedPriority);
                 }
                 Navigator.pop(context);
               },

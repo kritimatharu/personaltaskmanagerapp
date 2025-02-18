@@ -5,7 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:personaltaskmanagerapp/home_screen.dart';
 import 'package:personaltaskmanagerapp/login_screen.dart';
+
 import 'package:personaltaskmanagerapp/signup_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Personal Task Manager",
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        primaryColor: Colors.indigo,
-      ),
+      title: "Personal Task",
       home: _auth.currentUser != null ? HomeScreen() : LoginScreen(),
     );
   }
