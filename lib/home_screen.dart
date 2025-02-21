@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:personaltaskmanagerapp/model/task_model.dart';
@@ -25,11 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(221, 14, 12, 12),
+      // backgroundColor: const Color.fromARGB(221, 14, 12, 12),
+      backgroundColor: isDark ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(221, 22, 21, 21),
-        foregroundColor: Colors.white,
+        // backgroundColor: const Color.fromARGB(221, 22, 21, 21),
+        backgroundColor: isDark ? Colors.white : Colors.black,
+        foregroundColor:  isDark ? Colors.black : Colors.white,
         title: Text(
           "Task",
         ),

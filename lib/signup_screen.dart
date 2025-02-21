@@ -12,11 +12,12 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: isDark ? Colors.black : Colors.white,
         appBar: AppBar(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: isDark ? Colors.black: Colors.white,
+            foregroundColor: isDark ? Colors.white: Colors.black,
             title: Text("Create Account")),
         body: SingleChildScrollView(
             child: Padding(
@@ -29,7 +30,7 @@ class SignupScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: isDark ? Colors.white60 : Colors.black54,
                 ),
               ),
               SizedBox(height: 5),
@@ -38,14 +39,14 @@ class SignupScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: isDark ? Colors.white60 : Colors.black54,
                 ),
               ),
               SizedBox(height: 40),
               TextField(
                 controller: _emailController,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDark ? Colors.white60 : Colors.black54,
                 ),
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -57,7 +58,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                   labelText: "Email",
                   labelStyle: TextStyle(
-                    color: Colors.white60,
+                    color: isDark ? Colors.white60 : Colors.black54,
                   ),
                 ),
               ),
@@ -76,7 +77,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                   labelText: "Password",
                   labelStyle: TextStyle(
-                    color: Colors.white60,
+                    color: isDark ? Colors.white60 : Colors.black54,
                   ),
                 ),
               ),
@@ -112,7 +113,7 @@ class SignupScreen extends StatelessWidget {
               Text(
                 "OR",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDark ? Colors.white60 : Colors.black54,
                 ),
               ),
               SizedBox(
@@ -126,7 +127,7 @@ class SignupScreen extends StatelessWidget {
                 child: Text(
                   "Log In",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: isDark ? Colors.white60 : Colors.black54,
                     fontSize: 18,
                   ),
                 ),

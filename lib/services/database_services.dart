@@ -15,7 +15,7 @@ class DatabaseService {
       'uid': user!.uid,
       'title': title,
       'description': description,
-      'priority': Priority,
+      'priority': priority,
       'completed': false,
       'createdAt': FieldValue.serverTimestamp(),
     });
